@@ -10,33 +10,33 @@ import Foundation
 
 enum HakoAppIdentifiers {
      
-    static let base = "org.example.hako"
+    static let base = "feifei.qianbei.com"
 
      
-    static let appBundleID = "org.example.hako"
+    static let appBundleID = "feifei.qianbei.com"
 
      
-    static let macAppBundleID = "org.example.hako"
+    static let macAppBundleID = "feifei.qianbei.com"
 
      
-    static let tvAppBundleID = "org.example.hako"
+    static let tvAppBundleID = "feifei.qianbei.com"
 
      
     // Re-signing tools (Sideloadly, AltStore, enterprise certificates) rename the
     // extension, so the real identifier is read from the installed bundle.
-    static let packetTunnelExtensionBundleID = HakoRuntimeIdentity.packetTunnelBundleID(default: "org.example.hako.extension")
+    static let packetTunnelExtensionBundleID = HakoRuntimeIdentity.packetTunnelBundleID(default: "feifei.qianbei.com.extension")
 
      
-    static let macPacketTunnelExtensionBundleID = "org.example.hako.packet-tunnel"
+    static let macPacketTunnelExtensionBundleID = "feifei.qianbei.com.packet-tunnel"
 
      
-    static let controlsExtensionBundleID = "org.example.hako.controls"
+    static let controlsExtensionBundleID = "feifei.qianbei.com.controls"
 
      
-    static let shareExtensionBundleID = "org.example.hako.share"
+    static let shareExtensionBundleID = "feifei.qianbei.com.share"
 
      
-    static let tvPacketTunnelExtensionBundleID = "org.example.hako.tvextension"
+    static let tvPacketTunnelExtensionBundleID = "feifei.qianbei.com.tvextension"
 
      
      
@@ -49,16 +49,16 @@ enum HakoAppIdentifiers {
     // Re-signing tools rewrite the App Group to one owned by the signer. Using the
     // build-time name then yields no shared container ("profile library could not
     // be read"), so the group actually granted to this signature is used.
-    static var appGroup: String { HakoRuntimeIdentity.appGroup(default: "group.org.example.hako") }
+    static var appGroup: String { HakoRuntimeIdentity.appGroup(default: "group.feifei.qianbei.com") }
 
      
-    static let iCloudContainer = "iCloud.org.example.hako"
+    static let iCloudContainer = "iCloud.feifei.qianbei.com"
 
      
-    static let backgroundRefreshTask = "org.example.hako.refresh"
+    static let backgroundRefreshTask = "feifei.qianbei.com.refresh"
 
      
-    static let keychainService = "org.example.hako.credentials"
+    static let keychainService = "feifei.qianbei.com.credentials"
 }
 
 

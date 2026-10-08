@@ -9,7 +9,7 @@ import yaml
 ROOT=Path(__file__).resolve().parents[1]
 
 def main():
-    parser=argparse.ArgumentParser();parser.add_argument('--bundle-base');parser.add_argument('--team');args=parser.parse_args()
+    parser=argparse.ArgumentParser();parser.add_argument('--bundle-base', default='feifei.qianbei.com');parser.add_argument('--team', default='');args=parser.parse_args()
     path=ROOT/'apple/HakoClient/project.yml';project=yaml.safe_load(path.read_text());base=project['settings']['base']
     old=base['HAKO_BUNDLE_BASE'];new=args.bundle_base or old
     if not re.fullmatch(r'[A-Za-z0-9]+(?:[.-][A-Za-z0-9]+)+',new):raise ValueError('Invalid bundle base')
