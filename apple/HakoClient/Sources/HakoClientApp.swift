@@ -42,7 +42,7 @@ struct HakoClientApp: App {
     var body: some Scene {
         WindowGroup {
 
-            AppShellView()
+            QianbeiLaunchView()
 
         }
     }
