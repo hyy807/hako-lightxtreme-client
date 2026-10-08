@@ -149,6 +149,40 @@ public enum HakoAboutLink:
 }
 
  
+ 
+ 
+public enum HakoAboutCommunity:
+    String,
+    CaseIterable,
+    Identifiable,
+    Sendable
+{
+    case telegramChannel
+
+    public var id: Self { self }
+
+    public var title: String {
+        switch self {
+        case .telegramChannel: "TG 频道"
+        }
+    }
+
+     
+    public var role: String {
+        switch self {
+        case .telegramChannel: "千杯社区频道，点击前往"
+        }
+    }
+
+    public var url: URL {
+        switch self {
+        case .telegramChannel:
+            URL(string: "https://t.me/qianbeibuzu")!
+        }
+    }
+}
+
+ 
 public struct HakoAboutView<
     Icon: View,
     ComponentLogo: View,
@@ -211,6 +245,8 @@ public struct HakoAboutView<
             componentsSection
 
             acknowledgementsSection
+
+            communitySection
 
             if let developerMode {
                 developerSection(developerMode)
@@ -328,8 +364,38 @@ public struct HakoAboutView<
         }
     }
 
+    @ViewBuilder
+    private var communitySection: some View {
+        Section {
+            ForEach(HakoAboutCommunity.allCases) { channel in
+                Link(destination: channel.url) {
+                    linkRow(
+                        title: channel.title,
+                        role: channel.role,
+                        linksOut: true
+                    )
+                }
+                .buttonStyle(.plain)
+                .accessibilityIdentifier(
+                    "about.community.\(channel.rawValue)"
+                )
+            }
+        } header: {
+            Text("Community")
+                .accessibilityIdentifier("about.section.community")
+        }
+    }
+
     private func acknowledgementRow(
         _ project: HakoAboutAcknowledgement,
+        linksOut: Bool
+    ) -> some View {
+        linkRow(title: project.title, role: project.role, linksOut: linksOut)
+    }
+
+    private func linkRow(
+        title: String,
+        role: String,
         linksOut: Bool
     ) -> some View {
         HStack(alignment: .firstTextBaseline, spacing: HakoTheme.Spacing.row) {
@@ -337,10 +403,10 @@ public struct HakoAboutView<
                 alignment: .leading,
                 spacing: HakoTheme.Spacing.tight
             ) {
-                Text(project.title)
+                Text(LocalizedStringKey(title))
                     .font(.body)
                     .foregroundStyle(.primary)
-                Text(hako: .copy(project.role))
+                Text(hako: .copy(role))
                     .font(.footnote)
                     .foregroundStyle(.secondary)
                     .fixedSize(horizontal: false, vertical: true)
@@ -351,8 +417,8 @@ public struct HakoAboutView<
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)
-         
-         
+        
+        
         .padding(.vertical, HakoMacSettingsMetrics.rowVerticalInset(touch: 0))
         .contentShape(Rectangle())
     }
